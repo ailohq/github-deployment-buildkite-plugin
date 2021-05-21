@@ -11,17 +11,46 @@ steps:
   - command: echo 'Deploy preview created'
     plugins:
       - ailohq/github-deployment#v1.0.7:
-          # (optional) Names of env variables containing the username and personal access token with `repo_deployment` and `push` permissions.
-          # By default set to `GITHUB_USERNAME` and `GITHUB_TOKEN`.
           username-env: GITHUB_USERNAME
           token-env: GITHUB_TOKEN
-          # See https://docs.github.com/en/rest/reference/repos#create-a-deployment for description of the below
-          ref: v1.0.0 # optional (default: git commit SHA hash)
-          environment: qa # optional (default: "production")
-          environment_url: https://dev.ailo.io # optional (default: null)
-          production_environment: false # optional (default: `environment == "prod" || environment == "production"`)
-          transient_environment: false # optional (default: false)
+          ref: v1.0.0
+          environment: qa
+          environment_url: https://dev.ailo.io
+          production_environment: false
+          transient_environment: false
 ```
+
+## Configuration
+
+Many of the configuration options are passed to the GitHub deployment API requests. See the [deployment API docs](https://docs.github.com/en/rest/reference/repos#deployments) for additional details.
+
+### `username-env` (Optional, string)
+
+Name of environment variable for your GitHub username. Default: `GITHUB_USERNAME`.
+
+### `token-env` (Optional, string)
+
+Name of environment variable for your GitHub token which should contain `repo_deployment` permissions. Default: `GITHUB_TOKEN`.
+
+### `ref` (Optional, string)
+
+The ref to deploy. This can be a branch, tag, or SHA. Default: current git commit SHA hash.
+
+### `environment` (Optional, string)
+
+Name for the target deployment environment (e.g., production, staging, qa). Default: `production`.
+
+### `environment_url` (Optional, string)
+
+Sets the URL for accessing your environment. Default: `""`.
+
+### `production_environment` (Optional, boolean)
+
+Specifies if the given environment is one that end-users directly interact with. Default: `true` when environment is `production` or `prod` and `false` otherwise.
+
+### `transient_environment` (Optional, boolean)
+
+Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`.
 
 ## Developing
 
