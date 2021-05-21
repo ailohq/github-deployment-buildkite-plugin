@@ -44,6 +44,12 @@ Name for the target deployment environment (e.g., production, staging, qa). Defa
 
 Sets the URL for accessing your environment. Default: `""`.
 
+If you don't know your `environment_url` during pipeline creation, you can use Buildkite meta-data to set the environment url in your command.
+
+```sh
+buildkite-agent meta-data set "environment_url" "https://www.google.com"
+```
+
 ### `production_environment` (Optional, boolean)
 
 Specifies if the given environment is one that end-users directly interact with. Default: `true` when environment is `production` or `prod` and `false` otherwise.
